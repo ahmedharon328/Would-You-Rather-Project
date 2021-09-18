@@ -59,9 +59,10 @@ class UnAnswered extends Component{
 }
 
 const mapStateToProps =({users,authedUser,questions})=>{
-    const questionID = Object.keys(questions).sort((a,b) => questions[b].timestamp - questions[a].timestamp)
-    const answeredQuestion = authedUser ? Object.keys(users[authedUser].answers):null
-    const unAnsweredQuestion = answeredQuestion ? questionID.filter(question => !answeredQuestion.includes(question) ) : null
+    const questionID = Object.keys(questions)
+    const answeredQuestion = authedUser ? Object.keys(users[authedUser].answers).sort((a,b) => questions[b].timestamp - questions[a].timestamp):null
+    const unAnsweredQuestion = answeredQuestion ? questionID.filter(question => !answeredQuestion.includes(question))
+    .sort((a,b) => questions[b].timestamp - questions[a].timestamp): null
 
     return{
         answeredQuestion ,
